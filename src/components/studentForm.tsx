@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import {Box, Button, CircularProgress, FormControl, FormControlLabel, FormLabel, Radio} from '@material-ui/core';
 import {TextField, RadioGroup} from "@material-ui/core";
+import {useAppDispatch} from "../app/hooks";
+import {filterStudents} from "../features/student/StudentSlice";
 
 function StudentForm(props: any) {
     const [gender, setGender] = useState([]);
+    const dispatch = useAppDispatch();
     const handleFormSubmit = async () => {
         try {
-
+            dispatch(filterStudents({id: 1}))
         } catch (error) {
-
+            console.log(error)
         }
     };
 
@@ -41,7 +44,7 @@ function StudentForm(props: any) {
                 <TextField name="mark" label="Mark" type="number" />
 
                 <Box mt={3}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button onClick={handleFormSubmit} variant="contained" color="primary">
                         {<CircularProgress size={16} color="primary" />}
                         &nbsp;Save
                     </Button>

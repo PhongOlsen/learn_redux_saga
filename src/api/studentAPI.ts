@@ -13,6 +13,6 @@ const studentAPI = {
     deleteStudent(id: any) {
         const url = '/students';
         return axios.delete(baseApi + url + `/${id}`);
-    }
+    },
 }
 export default studentAPI;

@@ -1,13 +1,20 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import studentAPI from '../../api/studentAPI';
-import {fetchStudentList, loading} from "./StudentSlice";
+import {fetchStudentList, filterStudents, filterStudentSuccess, loading} from "./StudentSlice";
 
-function* fetchListStudent(action: any) {
+function* fetchListStudent() {
     try {
         const response = yield call(studentAPI.getAll);
-        console.log(action);
-        console.log(response);
         yield put(fetchStudentList(response))
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function* fetchFilterStudent(action: any) {
+    try {
+        console.log(action.payload);
+        yield put(filterStudentSuccess(action.payload));
     } catch (e) {
         console.log(e);
     }
@@ -15,4 +22,6 @@ function* fetchListStudent(action: any) {
 
 export default function* studentSaga() {
     yield takeLatest(loading, fetchListStudent);
+
+    yield takeLatest(filterStudents, fetchFilterStudent)
 }

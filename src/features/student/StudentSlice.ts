@@ -19,10 +19,17 @@ export const studentSlice = createSlice({
             state.list = action.payload.data;
             console.log(action);
         },
+        filterStudents(state, action: any) {
+            console.log(action);
+        },
+        filterStudentSuccess(state, action: any) {
+            console.log(action);
+            console.log(action.payload);
+        }
     },
 });
 
-export const { fetchStudentList, loading } = studentSlice.actions;
+export const { fetchStudentList, loading, filterStudents, filterStudentSuccess} = studentSlice.actions;
 
 export const selectListStudent = (state: any) => state.student.list;
 
